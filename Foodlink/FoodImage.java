@@ -23,7 +23,7 @@ import org.json.JSONObject;
  */
 public class FoodImage {
 
-   private final String USER_AGENT = "Mozilla/5.0";//idontknow
+   private final String USER_AGENT = "Mozilla/5.0";
 
     /**
      * @param args the command line arguments
@@ -31,11 +31,8 @@ public class FoodImage {
      * @throws org.json.JSONException
      */
     public static void main(String[] args) throws IOException, JSONException {
-        // TODO code application logic here      7  
         FoodImage http = new FoodImage();
-
         http.sendGet();
-        // TODO code application logic here
 
     }
 
@@ -71,19 +68,20 @@ public class FoodImage {
             System.out.println(ar.get(i) + ":\n" + url);
 
             StringBuffer response;
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()))) {
-                String inputLine;
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-            }
+
             System.out.println(response.toString());
 
             String filename = "food.txt";
             try (PrintWriter outputStream = new PrintWriter(filename)) {
                 outputStream.println(response.toString());
+            }catch(IOException e){
+                
             }
 
             String jsonData = " ";
