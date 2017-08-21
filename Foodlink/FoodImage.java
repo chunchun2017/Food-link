@@ -31,8 +31,11 @@ public class FoodImage {
      * @throws org.json.JSONException
      */
     public static void main(String[] args) throws IOException, JSONException {
+        // TODO code application logic here      7  
         FoodImage http = new FoodImage();
+
         http.sendGet();
+        // TODO code application logic here
 
     }
 
@@ -68,34 +71,20 @@ public class FoodImage {
             System.out.println(ar.get(i) + ":\n" + url);
 
             StringBuffer response;
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-            String inputLine;
+      BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
                 response = new StringBuffer();
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
                 }
-
+          
             System.out.println(response.toString());
-
-            String filename = "food.txt";
-            try (PrintWriter outputStream = new PrintWriter(filename)) {
-                outputStream.println(response.toString());
-            }catch(IOException e){
-                
-            }
-
-            String jsonData = " ";
-
-            String line;
-            br = new BufferedReader(new FileReader("food.txt"));
-            while ((line = br.readLine()) != null) {
-                jsonData += line + "\n";
-            }
-            JSONObject ki = new JSONObject(jsonData);
+             JSONObject ki = new JSONObject(response.toString());
             JSONArray bro = ki.getJSONArray("items");
             JSONObject items = bro.getJSONObject(0);
             System.out.println("link : " + items.getString("link"));
 
+           
         }
     }
 }
